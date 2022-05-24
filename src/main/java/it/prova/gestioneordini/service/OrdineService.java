@@ -12,7 +12,7 @@ public interface OrdineService {
 
 	public List<Ordine> listAll() throws Exception;
 
-	public Ordine inserisciNuovo(Ordine ordineInput) throws Exception;
+	public void inserisciNuovo(Ordine ordineInput) throws Exception;
 
 	public void aggiorna(Ordine ordineInput) throws Exception;
 

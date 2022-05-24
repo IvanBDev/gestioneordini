@@ -39,9 +39,29 @@ public class OrdineServiceImpl implements OrdineService{
 	}
 
 	@Override
-	public Ordine inserisciNuovo(Ordine ordineInput) throws Exception {
+	public void inserisciNuovo(Ordine ordineInput) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		// questo è come una connection
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			// questo è come il MyConnection.getConnection()
+			entityManager.getTransaction().begin();
+
+			// uso l'injection per il dao
+			ordineDaoInstance.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			ordineDaoInstance.insert(ordineInput);
+
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 	@Override
