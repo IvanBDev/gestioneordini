@@ -1,10 +1,7 @@
 package it.prova.gestioneordini.dao.categoria;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
-
-import it.prova.gestioneordini.model.Articolo;
 import it.prova.gestioneordini.model.Categoria;
 import it.prova.gestioneordini.model.Ordine;
 
@@ -21,13 +18,13 @@ public class CategoriaDAOImpl implements CategoriaDAO{
 	@Override
 	public List<Categoria> list() throws Exception {
 		// TODO Auto-generated method stub
-		return entityManager.createQuery("FROM Articolo", Categoria.class).getResultList();
+		return entityManager.createQuery("FROM Categoria", Categoria.class).getResultList();
 	}
 
 	@Override
 	public Categoria get(Long id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Categoria.class, id);
 	}
 
 	@Override
