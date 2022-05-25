@@ -37,9 +37,12 @@ public class CategoriaDAOImpl implements CategoriaDAO{
 	}
 
 	@Override
-	public void insert(Categoria o) throws Exception {
+	public void insert(Categoria input) throws Exception {
 		// TODO Auto-generated method stub
-		
+		if (input == null)
+			throw new Exception("Problema valore in input");
+
+		entityManager.persist(input);
 	}
 
 	@Override
