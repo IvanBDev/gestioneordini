@@ -28,7 +28,8 @@ public class TestGestioneOrdini {
 			
 			//testAggiornaRecordOrdine(ordineServiceInstance);
 			
-			testAggiungiCategoriaAdArticoli(articoloServiceInstance, categoriaServiceInstance);
+			//testAggiungiCategoriaAdArticoli(articoloServiceInstance, categoriaServiceInstance);
+			testAggiungiArticoloACategoria(ordineServiceInstance, articoloServiceInstance, categoriaServiceInstance);
 			
 			System.out.println("Nella tabella Ordini sono presenti: "+ ordineServiceInstance.listAll().size()+ " elementi");
 		} catch (Throwable e) {
@@ -131,6 +132,37 @@ public class TestGestioneOrdini {
 		System.out.println(".....................testAggiungiCategoriaAdArticoli fine: PASSED..................................");
 	}
 	
+	public static void testAggiungiArticoloACategoria(OrdineService ordineServiceInstance, ArticoloService articoloServiceInstance, CategoriaService categoriaServiceInstance) throws Exception{
+		System.out.println(".....................testAggiungiArticoloACategoria inizio: ..................................");
+		
+		List<Ordine> listaOrdini = ordineServiceInstance.listAll();
+		if(listaOrdini.isEmpty())
+			throw new RuntimeException("Non ci sono proprietari nel DB");
+		
+		Date dataSpedizione = new SimpleDateFormat("dd/MM/yyyy").parse("29/03/2021");
+		Ordine nuovoOrdine = new Ordine("Anna", "Via Castoro 5", dataSpedizione);
+		
+		if(nuovoOrdine.getId() != null)
+			throw new RuntimeException("testInserisciProprietario fallito: record già presente ");
+		
+		ordineServiceInstance.inserisciNuovo(nuovoOrdine);
+		
+		List<Articolo> listaArticoli = articoloServiceInstance.listAll();
+		if(listaArticoli.isEmpty())
+			throw new RuntimeException("Non ci sono proprietari nel DB");
+		
+		Date dataInserimentoArticolo = new SimpleDateFormat("dd/MM/yyyy").parse("15/07/2021");
+		Articolo nuovoArticolo = new Articolo("Animal Crossing", "AMCS60", 60, dataInserimentoArticolo, nuovoOrdine);
+		
+		Categoria nuovaCategoria = new Categoria("Videogioco", "00");
+		categoriaServiceInstance.inserisciNuovo(nuovaCategoria);
+		if(nuovaCategoria.getId() == null)
+			throw new RuntimeException("Non ci sono categorie nel DB");
+		
+		categoriaServiceInstance.aggiungiArticolo(nuovaCategoria, nuovoArticolo);
+		
+		System.out.println(".....................testAggiungiArticoloACategoria fine: PASSED..................................");
+	}
 	
 	
 	

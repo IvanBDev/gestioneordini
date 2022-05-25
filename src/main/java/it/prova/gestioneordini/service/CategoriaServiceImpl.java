@@ -105,9 +105,40 @@ public class CategoriaServiceImpl implements CategoriaService {
 	}
 
 	@Override
-	public void aggiungiCd(Categoria categoriaInstance, Articolo articoloInstance) throws Exception {
+	public void aggiungiArticolo(Categoria categoriaInstance, Articolo articoloInstance) throws Exception {
 		// TODO Auto-generated method stub
+		// questo è come una connection
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
+		try {
+			// questo è come il MyConnection.getConnection()
+			entityManager.getTransaction().begin();
+
+			// uso l'injection per il dao
+			categoriaDAO.setEntityManager(entityManager);
+
+			// 'attacco' alla sessione di hibernate i due oggetti
+			// così jpa capisce che se risulta presente quel cd non deve essere inserito
+			categoriaInstance = entityManager.merge(categoriaInstance);
+			// attenzione che genereInstance deve essere già presente (lo verifica dall'id)
+			// se così non è viene lanciata un'eccezione
+			articoloInstance = entityManager.merge(articoloInstance);
+
+			articoloInstance.getCategorie().add(categoriaInstance);
+			// l'update non viene richiamato a mano in quanto
+			// risulta automatico, infatti il contesto di persistenza
+			// rileva che cdInstance ora è dirty vale a dire che una sua
+			// proprieta ha subito una modifica (vale anche per i Set ovviamente)
+			// inoltre se risultano già collegati lo capisce automaticamente grazie agli id
+
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 	@Override

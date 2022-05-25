@@ -19,9 +19,9 @@ public interface CategoriaService {
 	public void inserisciNuovo(Categoria categoriaInstance) throws Exception;
 
 	public void rimuovi(Long idGenere) throws Exception;
-
-	public void aggiungiCd(Categoria categoriaInstance, Articolo articoloInstance) throws Exception;
+	
+	void aggiungiArticolo(Categoria categoriaInstance, Articolo articoloInstance) throws Exception;
 	
 	public List<Categoria> trovaTutteLeCategorieDistinteDaArticoliDiUnCertoOrdine(Ordine ordineInput) throws Exception;
-	
+
 }
