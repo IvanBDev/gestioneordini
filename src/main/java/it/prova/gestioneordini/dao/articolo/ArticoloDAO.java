@@ -10,4 +10,6 @@ public interface ArticoloDAO extends IBaseDAO<Articolo>{
 	
 	public boolean findIfArticlesHasCategories(Long idArticolo) throws Exception;
 	
+	public Long totalSumOfArticalsMadebyMarioRossi() throws Exception;
+	
 }

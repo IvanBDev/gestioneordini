@@ -76,4 +76,11 @@ public class ArticoloDAOImpl implements ArticoloDAO{
 		return query.getResultList().isEmpty();
 	}
 
+	@Override
+	public Long totalSumOfArticalsMadebyMarioRossi() throws Exception {
+		// TODO Auto-generated method stub
+		TypedQuery<Long> query = entityManager.createQuery("SELECT SUM(a.prezzoSingolo) FROm Articolo a INNER JOIN a.ordine o WHERE o.nomeDestinatario = 'Mario Rossi'", Long.class);
+		return query.getResultList().get(0);
+	}
+
 }

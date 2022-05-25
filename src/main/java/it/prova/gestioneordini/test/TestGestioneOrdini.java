@@ -335,8 +335,6 @@ public class TestGestioneOrdini {
 		List<String> risultatoRicerca = categoriaServiceInstance.trovaTuttiICodiciDistintiDaOrdiniRisalentiAlMeseDiFebbraio2022();
 		System.out.println(risultatoRicerca.size());
 		
-		
-		
 		System.out.println(
 				".....................testTrovaTuttiICodiciDistintiDaOrdiniRisalentiAlMeseDiFebbraio2022 fine: PASSED..................................");
 	}
