@@ -39,9 +39,12 @@ public class ArticoloDAOImpl implements ArticoloDAO{
 	}
 
 	@Override
-	public void insert(Articolo o) throws Exception {
+	public void insert(Articolo input) throws Exception {
 		// TODO Auto-generated method stub
-		
+		if (input == null)
+			throw new Exception("Problema valore in input");
+
+		entityManager.persist(input);
 	}
 
 	@Override
