@@ -56,7 +56,9 @@ public class CategoriaDAOImpl implements CategoriaDAO{
 	@Override
 	public List<Categoria> findAllCategoriesDistinctByArticlesOfACertianOrder(Ordine ordineInput) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Categoria> query = entityManager.createQuery("select distinct c from Categoria c inner join c.articoli a inner join a.ordine o where o = :ordineInput", Categoria.class);
+		query.setParameter("ordineInput", ordineInput);
+		return query.getResultList();
 	}
 
 	@Override

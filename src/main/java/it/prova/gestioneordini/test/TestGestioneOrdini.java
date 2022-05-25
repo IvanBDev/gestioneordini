@@ -35,7 +35,10 @@ public class TestGestioneOrdini {
 			
 			//testTrovaTuttiGliOrdiniDiUnaCertaCategoria(ordineServiceInstance, categoriaServiceInstance);
 			
-			testSommaDegliArticoliDataUnaDeterminataCategoria(articoloServiceInstance, categoriaServiceInstance);
+			//testSommaDegliArticoliDataUnaDeterminataCategoria(articoloServiceInstance, categoriaServiceInstance);
+			
+			testTrovaTutteLeCategorieDistinteDaArticoliDiUnCertoOrdine(categoriaServiceInstance, ordineServiceInstance);
+			
 			
 			System.out.println("Nella tabella Ordini sono presenti: "+ ordineServiceInstance.listAll().size()+ " elementi");
 		} catch (Throwable e) {
@@ -225,12 +228,126 @@ public class TestGestioneOrdini {
 			throw new RuntimeException("Non ci sono categorie nel DB");
 		
 		System.out.println(articoloServiceInstance.sommaTotaleDegliArticoliDiUnCertoOrdine(listaCategorie.get(0)));
-		
-		
-		
-		
+	
 		System.out.println(".....................testSommaDegliArticoliDataUnaDeterminataCategoria fine: PASSED..................................");
 	}
+	
+	public static void testTrovaTutteLeCategorieDistinteDaArticoliDiUnCertoOrdine(CategoriaService categoriaServiceInstance, OrdineService ordineServiceInstance) throws Exception{
+		System.out.println(".....................testTrovaTutteLeCategorieDistinteDaArticoliDiUnCertoOrdine inizio: ..................................");
+		
+		List<Categoria> listaCategorie = categoriaServiceInstance.listAll();
+		if(listaCategorie.isEmpty())
+			throw new RuntimeException("Non ci sono categorie nel DB");
+		
+		Ordine ordinePerRicerca = ordineServiceInstance.listAll().get(2);
+		
+		
+		List<Categoria> risultatoRicerca = categoriaServiceInstance.trovaTutteLeCategorieDistinteDaArticoliDiUnCertoOrdine(ordinePerRicerca);
+		System.out.println(risultatoRicerca.size());
+			
+		System.out.println(".....................testTrovaTutteLeCategorieDistinteDaArticoliDiUnCertoOrdine fine: PASSED..................................");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
