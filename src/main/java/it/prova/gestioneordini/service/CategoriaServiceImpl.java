@@ -13,7 +13,7 @@ import it.prova.gestioneordini.model.Ordine;
 public class CategoriaServiceImpl implements CategoriaService {
 
 	private CategoriaDAO categoriaDAO;
-	
+
 	@Override
 	public void setCategoriaDAO(CategoriaDAO categoriaDAO) throws Exception {
 		// TODO Auto-generated method stub
@@ -47,9 +47,29 @@ public class CategoriaServiceImpl implements CategoriaService {
 	}
 
 	@Override
-	public void aggiorna(Categoria categoriaInstance) throws Exception {
+	public void aggiorna(Categoria categoriaInput) throws Exception {
 		// TODO Auto-generated method stub
+		// questo è come una connection
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
+		try {
+			// questo è come il MyConnection.getConnection()
+			entityManager.getTransaction().begin();
+
+			// uso l'injection per il dao
+			categoriaDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			categoriaDAO.update(categoriaInput);
+
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 	@Override
