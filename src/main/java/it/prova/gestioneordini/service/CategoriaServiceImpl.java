@@ -73,9 +73,29 @@ public class CategoriaServiceImpl implements CategoriaService {
 	}
 
 	@Override
-	public void inserisciNuovo(Categoria categoriaInstance) throws Exception {
+	public void inserisciNuovo(Categoria categoriaInput) throws Exception {
 		// TODO Auto-generated method stub
+		// questo è come una connection
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
+		try {
+			// questo è come il MyConnection.getConnection()
+			entityManager.getTransaction().begin();
+
+			// uso l'injection per il dao
+			categoriaDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			categoriaDAO.insert(categoriaInput);
+
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 	@Override
