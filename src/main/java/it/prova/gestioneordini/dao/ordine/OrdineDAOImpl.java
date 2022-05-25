@@ -29,9 +29,12 @@ public class OrdineDAOImpl implements OrdineDAO {
 	}
 
 	@Override
-	public void update(Ordine o) throws Exception {
+	public void update(Ordine input) throws Exception {
 		// TODO Auto-generated method stub
-
+		if(input == null)
+			throw new Exception("Valore in input non valido");
+		
+		entityManager.merge(input);
 	}
 
 	@Override
