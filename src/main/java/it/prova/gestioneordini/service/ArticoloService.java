@@ -19,8 +19,8 @@ public interface ArticoloService {
 	public void aggiorna(Articolo articoloInstance) throws Exception;
 
 	public void inserisciNuovo(Articolo articoloInstance) throws Exception;
-
-	public void rimuovi(Long idCd) throws Exception;
+	
+	public void rimuovi(Long idInput) throws Exception;
 
 	public void aggiungiCategoria(Articolo articoloInstance, Categoria categoriaInstance) throws Exception;
 

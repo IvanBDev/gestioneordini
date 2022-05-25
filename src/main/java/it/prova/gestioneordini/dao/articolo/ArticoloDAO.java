@@ -8,4 +8,6 @@ public interface ArticoloDAO extends IBaseDAO<Articolo>{
 	
 	public int totalSumOfArticlesByACertianOrder(Ordine ordineInput) throws Exception;
 	
+	public boolean controlloPresenzaOrdini(Long idOrdine) throws Exception; 
+	
 }

@@ -16,7 +16,7 @@ public interface OrdineService {
 
 	public void aggiorna(Ordine ordineInput) throws Exception;
 
-	public void rimuovi(Ordine ordine) throws Exception;
+	public void rimuovi(Long ordineId) throws Exception;
 
 	public List<Ordine> trovaTuttiGliOrdiniDiUnaCertaCategoria(Categoria catecoriaInput) throws Exception;
 

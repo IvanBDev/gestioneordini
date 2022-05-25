@@ -9,12 +9,12 @@ import it.prova.gestioneordini.dao.ordine.OrdineDAO;
 import it.prova.gestioneordini.model.Categoria;
 import it.prova.gestioneordini.model.Ordine;
 
-public class OrdineServiceImpl implements OrdineService{
-	
+public class OrdineServiceImpl implements OrdineService {
+
 	private OrdineDAO ordineDAO;
 
 	@Override
-	public void setOrdineDAO(OrdineDAO ordineDAO){
+	public void setOrdineDAO(OrdineDAO ordineDAO) {
 		// TODO Auto-generated method stub
 		this.ordineDAO = ordineDAO;
 	}
@@ -50,7 +50,7 @@ public class OrdineServiceImpl implements OrdineService{
 			entityManager.getTransaction().begin();
 
 			// uso l'injection per il dao
-			ordineDAO.setEntityManager(entityManager); 
+			ordineDAO.setEntityManager(entityManager);
 
 			// eseguo quello che realmente devo fare
 			ordineDAO.insert(ordineInput);
@@ -92,9 +92,29 @@ public class OrdineServiceImpl implements OrdineService{
 	}
 
 	@Override
-	public void rimuovi(Ordine ordine) throws Exception {
+	public void rimuovi(Long ordineId) throws Exception {
 		// TODO Auto-generated method stub
-		
+		// questo è come una connection
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			// questo è come il MyConnection.getConnection()
+			entityManager.getTransaction().begin();
+
+			// uso l'injection per il dao
+			ordineDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			ordineDAO.delete(ordineDAO.get(ordineId));
+
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 	@Override

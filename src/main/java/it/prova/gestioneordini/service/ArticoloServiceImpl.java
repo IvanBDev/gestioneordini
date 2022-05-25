@@ -3,6 +3,7 @@ package it.prova.gestioneordini.service;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import it.prova.gestioneordini.dao.EntityManagerUtil;
 import it.prova.gestioneordini.dao.articolo.ArticoloDAO;
@@ -107,7 +108,6 @@ public class ArticoloServiceImpl implements ArticoloService {
 
 	@Override
 	public void rimuovi(Long idInput) throws Exception {
-		// TODO Auto-generated method stub
 		// questo è come una connection
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
@@ -119,10 +119,10 @@ public class ArticoloServiceImpl implements ArticoloService {
 			articoloDAO.setEntityManager(entityManager);
 
 			// eseguo quello che realmente devo fare
-			if(articoloDAO.get(idInput).getOrdine() == null)
+			if(articoloDAO.controlloPresenzaOrdini(idInput) == true)
 				articoloDAO.delete(articoloDAO.get(idInput));
 			else
-				throw new CustomException("Ordini/e presente/i nelle/a relazioni/e");
+				throw new CustomException("Ci sono degli ordini collegati all'articolo");
 
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
@@ -134,6 +134,7 @@ public class ArticoloServiceImpl implements ArticoloService {
 		}
 	}
 
+	
 	@Override
 	public void aggiungiCategoria(Articolo articoloInstance, Categoria categoriaInstance) throws Exception {
 		// TODO Auto-generated method stub

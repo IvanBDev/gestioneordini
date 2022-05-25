@@ -3,6 +3,7 @@ package it.prova.gestioneordini.dao.articolo;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import it.prova.gestioneordini.model.Articolo;
 import it.prova.gestioneordini.model.Ordine;
@@ -60,6 +61,14 @@ public class ArticoloDAOImpl implements ArticoloDAO{
 	public int totalSumOfArticlesByACertianOrder(Ordine ordineInput) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public boolean controlloPresenzaOrdini(Long idOrdine) throws Exception {
+		// TODO Auto-generated method stub
+		TypedQuery<Articolo> query = entityManager.createQuery("SELECT o.* FROM Articolo a INNER JOIN a.ordine o WHERE o.id = :idOrdine", Articolo.class);
+		query.setParameter("idOrdine", idOrdine);
+		return query.getResultList().isEmpty();
 	}
 
 }
