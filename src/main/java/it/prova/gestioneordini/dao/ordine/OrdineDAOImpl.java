@@ -7,13 +7,12 @@ import javax.persistence.EntityManager;
 import it.prova.gestioneordini.model.Categoria;
 import it.prova.gestioneordini.model.Ordine;
 
-public class OrdineDAOImpl implements OrdineDAO{
-	
+public class OrdineDAOImpl implements OrdineDAO {
+
 	private EntityManager entityManager;
 
 	@Override
 	public void setEntityManager(EntityManager entityManager) {
-		// TODO Auto-generated method stub
 		this.entityManager = entityManager;
 	}
 
@@ -32,22 +31,22 @@ public class OrdineDAOImpl implements OrdineDAO{
 	@Override
 	public void update(Ordine o) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void insert(Ordine input) throws Exception {
 		// TODO Auto-generated method stub
-		if(input == null)
+		if (input == null)
 			throw new Exception("Problema valore in input");
-		
+
 		entityManager.persist(input);
 	}
 
 	@Override
 	public void delete(Ordine o) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

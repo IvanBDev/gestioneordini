@@ -8,7 +8,7 @@ import it.prova.gestioneordini.model.Ordine;
 
 public interface OrdineService {
 
-	public void setOrdineDAO(OrdineDAO ordineDaoInstance) throws Exception;
+	public void setOrdineDAO(OrdineDAO ordineDAO) throws Exception;
 
 	public List<Ordine> listAll() throws Exception;
 

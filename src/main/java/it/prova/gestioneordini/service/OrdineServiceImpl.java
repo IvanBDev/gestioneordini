@@ -8,14 +8,15 @@ import it.prova.gestioneordini.dao.EntityManagerUtil;
 import it.prova.gestioneordini.dao.ordine.OrdineDAO;
 import it.prova.gestioneordini.model.Categoria;
 import it.prova.gestioneordini.model.Ordine;
+
 public class OrdineServiceImpl implements OrdineService{
 	
-	private OrdineDAO ordineDaoInstance;
+	private OrdineDAO ordineDAO;
 
 	@Override
-	public void setOrdineDAO(OrdineDAO ordineDaoInstance) throws Exception {
+	public void setOrdineDAO(OrdineDAO ordineDAO){
 		// TODO Auto-generated method stub
-		this.ordineDaoInstance = ordineDaoInstance;
+		this.ordineDAO = ordineDAO;
 	}
 
 	@Override
@@ -26,10 +27,10 @@ public class OrdineServiceImpl implements OrdineService{
 
 		try {
 			// uso l'injection per il dao
-			ordineDaoInstance.setEntityManager(entityManager);
+			ordineDAO.setEntityManager(entityManager);
 
 			// eseguo quello che realmente devo fare
-			return ordineDaoInstance.list();
+			return ordineDAO.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -49,10 +50,10 @@ public class OrdineServiceImpl implements OrdineService{
 			entityManager.getTransaction().begin();
 
 			// uso l'injection per il dao
-			ordineDaoInstance.setEntityManager(entityManager);
+			ordineDAO.setEntityManager(entityManager); 
 
 			// eseguo quello che realmente devo fare
-			ordineDaoInstance.insert(ordineInput);
+			ordineDAO.insert(ordineInput);
 
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {

@@ -12,14 +12,14 @@ public class MyDaoFactory {
 	public static ArticoloDAO articoloDaoInstance;
 	public static CategoriaDAO categotriaDaoInstance;
 	
-	public static OrdineDAO getCdDAOInstance() {
+	public static OrdineDAO getOrdineDAOInstance() {
 		if (ordineDaoInstance == null)
 			ordineDaoInstance = new OrdineDAOImpl();
 
 		return ordineDaoInstance;
 	}
 
-	public static ArticoloDAO getGenereDAOInstance() {
+	public static ArticoloDAO getArticoloDAOInstance() {
 		if (articoloDaoInstance == null)
 			articoloDaoInstance = new ArticoloDAOImpl();
 

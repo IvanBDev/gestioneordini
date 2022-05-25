@@ -1,6 +1,10 @@
 package it.prova.gestioneordini.test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import it.prova.gestioneordini.dao.EntityManagerUtil;
+import it.prova.gestioneordini.model.Ordine;
 import it.prova.gestioneordini.service.ArticoloService;
 import it.prova.gestioneordini.service.CategoriaService;
 import it.prova.gestioneordini.service.MyServiceFactory;
@@ -15,8 +19,8 @@ public class TestGestioneOrdini {
 		CategoriaService categoriaServiceInstance = MyServiceFactory.getCategoriaServiceInstance();
 		
 		try {
-			
-			
+			//System.out.println("Nella tabella Ordini sono presenti: "+ ordineServiceInstance.listAll().size()+ " elementi");
+			testInserisciNuovoOrdine(ordineServiceInstance);
 			
 
 		} catch (Throwable e) {
@@ -28,6 +32,22 @@ public class TestGestioneOrdini {
 		}
 	}
 	
-	
+	public static void testInserisciNuovoOrdine(OrdineService ordineServiceInstance) throws Exception{
+		System.out.println(".....................testInserisciNuovoOrdine inizio: ..................................");
+		
+		Date dataSpedizione = new SimpleDateFormat("dd/MM/yyyy").parse("10/05/2022");
+		Ordine nuovoOrdine = new Ordine("Ivan", "Via Firenze 112", dataSpedizione);
+		
+		if(nuovoOrdine.getId() != null)
+			throw new RuntimeException("testInserisciProprietario fallito: record già presente ");
+		
+		ordineServiceInstance.inserisciNuovo(nuovoOrdine);
+		
+		if (nuovoOrdine.getId() == null)
+			throw new Exception("testInserisciProprietario fallito ");
+			
+		
+		System.out.println(".....................testInserisciNuovoOrdine fine: PASSED..................................");
+	}
 
 }
