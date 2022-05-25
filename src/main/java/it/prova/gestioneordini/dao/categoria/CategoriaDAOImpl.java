@@ -28,9 +28,12 @@ public class CategoriaDAOImpl implements CategoriaDAO{
 	}
 
 	@Override
-	public void update(Categoria o) throws Exception {
+	public void update(Categoria input) throws Exception {
 		// TODO Auto-generated method stub
+		if(input == null)
+			throw new Exception("Valore in input non valido");
 		
+		entityManager.merge(input);
 	}
 
 	@Override
