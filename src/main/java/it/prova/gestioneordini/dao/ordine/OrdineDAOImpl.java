@@ -81,4 +81,13 @@ public class OrdineDAOImpl implements OrdineDAO {
 		return query.getResultList().isEmpty();
 	}
 
+	@Override
+	public List<String> findAllDistinctOrderAddressesWithCode(String codiceStringa) throws Exception {
+		// TODO Auto-generated method stub
+		TypedQuery<String> query = entityManager.createQuery("SELECT DISTINCT o.indirizzoSpedizione FROM Ordine o INNER JOIN o.articoli a WHERE a.numeroSeriale = :codiceStringa", String.class);
+		query.setParameter("codiceStringa", "%"+ codiceStringa +"%");
+		
+		return query.getResultList();
+	}
+
 }

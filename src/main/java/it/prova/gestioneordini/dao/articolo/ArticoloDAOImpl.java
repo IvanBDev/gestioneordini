@@ -7,8 +7,6 @@ import javax.persistence.TypedQuery;
 
 import it.prova.gestioneordini.model.Articolo;
 import it.prova.gestioneordini.model.Categoria;
-import it.prova.gestioneordini.model.Ordine;
-
 public class ArticoloDAOImpl implements ArticoloDAO{
 	
 	private EntityManager entityManager;

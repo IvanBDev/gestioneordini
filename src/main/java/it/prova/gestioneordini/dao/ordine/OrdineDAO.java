@@ -15,4 +15,6 @@ public interface OrdineDAO extends IBaseDAO<Ordine>{
 	
 	public boolean findIfOrderHasArticles(Long idOrdine) throws Exception;
 	
+	public List<String> findAllDistinctOrderAddressesWithCode(String codiceStringa) throws Exception;
+	
 }

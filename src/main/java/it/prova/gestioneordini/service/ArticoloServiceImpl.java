@@ -3,14 +3,12 @@ package it.prova.gestioneordini.service;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 
 import it.prova.gestioneordini.dao.EntityManagerUtil;
 import it.prova.gestioneordini.dao.articolo.ArticoloDAO;
 import it.prova.gestioneordini.exception.CustomException;
 import it.prova.gestioneordini.model.Articolo;
 import it.prova.gestioneordini.model.Categoria;
-import it.prova.gestioneordini.model.Ordine;
 
 public class ArticoloServiceImpl implements ArticoloService {
 
