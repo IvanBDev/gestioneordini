@@ -8,11 +8,13 @@ import it.prova.gestioneordini.model.Categoria;
 import it.prova.gestioneordini.model.Ordine;
 
 public class CategoriaDAOImpl implements CategoriaDAO{
+	
+	private EntityManager entityManager;
 
 	@Override
 	public void setEntityManager(EntityManager entityManager) {
 		// TODO Auto-generated method stub
-		
+		this.entityManager = entityManager;
 	}
 
 	@Override
