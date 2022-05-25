@@ -119,10 +119,7 @@ public class ArticoloServiceImpl implements ArticoloService {
 			articoloDAO.setEntityManager(entityManager);
 
 			// eseguo quello che realmente devo fare
-			if(articoloDAO.controlloPresenzaOrdini(idInput) == true)
 				articoloDAO.delete(articoloDAO.get(idInput));
-			else
-				throw new CustomException("Ci sono degli ordini collegati all'articolo");
 
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {

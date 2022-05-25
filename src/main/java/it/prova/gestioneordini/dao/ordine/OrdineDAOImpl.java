@@ -3,6 +3,7 @@ package it.prova.gestioneordini.dao.ordine;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import it.prova.gestioneordini.model.Categoria;
 import it.prova.gestioneordini.model.Ordine;
@@ -58,7 +59,9 @@ public class OrdineDAOImpl implements OrdineDAO {
 	@Override
 	public List<Ordine> findAllOrdersWithACertianCategory(Categoria catecoriaInput) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Ordine> query = entityManager.createQuery("select o from Ordine o join o.articoli a join a.categorie c where c.id = :categoria", Ordine.class);
+		query.setParameter("categoria", catecoriaInput.getDescrizione());
+		return query.getResultList();
 	}
 
 	@Override

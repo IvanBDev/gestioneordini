@@ -31,7 +31,9 @@ public class TestGestioneOrdini {
 			//testAggiungiCategoriaAdArticoli(articoloServiceInstance, categoriaServiceInstance);
 			//testAggiungiArticoloACategoria(ordineServiceInstance, articoloServiceInstance, categoriaServiceInstance);
 			
-			System.out.println(articoloServiceInstance.listAll().get(0).getOrdine());
+			testRimuoviArticoloDaOrdine(ordineServiceInstance, articoloServiceInstance);
+			
+			
 			
 			System.out.println("Nella tabella Ordini sono presenti: "+ ordineServiceInstance.listAll().size()+ " elementi");
 		} catch (Throwable e) {
@@ -166,7 +168,33 @@ public class TestGestioneOrdini {
 		System.out.println(".....................testAggiungiArticoloACategoria fine: PASSED..................................");
 	}
 	
-	
+	public static void testRimuoviArticoloDaOrdine(OrdineService ordineServiceInstance, ArticoloService articoloServiceInstance) throws Exception{
+		System.out.println(".....................testRimuoviArticoloDaOrdine inizio: ..................................");
+		
+		List<Ordine> listaOrdini = ordineServiceInstance.listAll();
+		if(listaOrdini.isEmpty())
+			throw new RuntimeException("Non ci sono proprietari nel DB");
+		
+		Date dataSpedizione = new SimpleDateFormat("dd/MM/yyyy").parse("19/08/2021");
+		Ordine nuovoOrdine = new Ordine("Ahmedeo", "Via Flavia 50", dataSpedizione);
+		
+		if(nuovoOrdine.getId() != null)
+			throw new RuntimeException("testInserisciProprietario fallito: record già presente ");
+		
+		ordineServiceInstance.inserisciNuovo(nuovoOrdine);
+		
+		if (nuovoOrdine.getId() == null)
+			throw new Exception("testInserisciProprietario fallito ");
+		
+		Date dataInserimentoArticolo = new SimpleDateFormat("dd/MM/yyyy").parse("17/08/2021");
+		Articolo nuovoArticolo = new Articolo("Maglietta Anime", "MGTANM55", 55, dataInserimentoArticolo, nuovoOrdine);
+		
+		articoloServiceInstance.inserisciNuovo(nuovoArticolo);
+		
+		ordineServiceInstance.rimuoviArticolo(nuovoOrdine, nuovoArticolo);
+		
+		System.out.println(".....................testRimuoviArticoloDaOrdine fine: PASSED..................................");
+	}
 	
 	
 	
