@@ -62,7 +62,7 @@ public class ArticoloDAOImpl implements ArticoloDAO{
 	public Long totalSumOfArticlesByACertianOrder(Categoria categoriaInput) throws Exception {
 		// TODO Auto-generated method stub
 		TypedQuery<Long> query = entityManager.createQuery("SELECT SUM(a.prezzoSingolo) FROM Articolo a INNER JOIN  a.categorie c WHERE c = :categoriaInput", Long.class);
-		query.setParameter("idCategoria", categoriaInput);
+		query.setParameter("categoriaInput", categoriaInput);
 		
 		return query.getResultList().get(0);
 	}

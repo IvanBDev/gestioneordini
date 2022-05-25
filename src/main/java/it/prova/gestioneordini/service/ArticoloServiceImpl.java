@@ -173,9 +173,22 @@ public class ArticoloServiceImpl implements ArticoloService {
 	}
 
 	@Override
-	public int sommaTotaleDegliArticoliDiUnCertoOrdine(Ordine ordineInput) throws Exception {
+	public Long sommaTotaleDegliArticoliDiUnCertoOrdine(Categoria categoriaInput) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			// uso l'injection per il dao
+			articoloDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			return articoloDAO.totalSumOfArticlesByACertianOrder(categoriaInput);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 	@Override

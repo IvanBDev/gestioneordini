@@ -31,9 +31,11 @@ public class TestGestioneOrdini {
 			//testAggiungiCategoriaAdArticoli(articoloServiceInstance, categoriaServiceInstance);
 			//testAggiungiArticoloACategoria(ordineServiceInstance, articoloServiceInstance, categoriaServiceInstance);
 			
-			testRimuoviArticoloDaOrdine(ordineServiceInstance, articoloServiceInstance);
+			//testRimuoviArticoloDaOrdine(ordineServiceInstance, articoloServiceInstance);
 			
 			//testTrovaTuttiGliOrdiniDiUnaCertaCategoria(ordineServiceInstance, categoriaServiceInstance);
+			
+			testSommaDegliArticoliDataUnaDeterminataCategoria(articoloServiceInstance, categoriaServiceInstance);
 			
 			System.out.println("Nella tabella Ordini sono presenti: "+ ordineServiceInstance.listAll().size()+ " elementi");
 		} catch (Throwable e) {
@@ -215,7 +217,20 @@ public class TestGestioneOrdini {
 		System.out.println(".....................testTrovaTuttiGliOrdiniDiUnaCertaCategoria fine: PASSED..................................");
 	}
 	
-	
+	public static void testSommaDegliArticoliDataUnaDeterminataCategoria(ArticoloService articoloServiceInstance, CategoriaService categoriaServiceInstance) throws Exception{
+		System.out.println(".....................testSommaDegliArticoliDataUnaDeterminataCategoria inizio: ..................................");
+		
+		List<Categoria> listaCategorie = categoriaServiceInstance.listAll();
+		if(listaCategorie.isEmpty())
+			throw new RuntimeException("Non ci sono categorie nel DB");
+		
+		System.out.println(articoloServiceInstance.sommaTotaleDegliArticoliDiUnCertoOrdine(listaCategorie.get(0)));
+		
+		
+		
+		
+		System.out.println(".....................testSommaDegliArticoliDataUnaDeterminataCategoria fine: PASSED..................................");
+	}
 	
 	
 	

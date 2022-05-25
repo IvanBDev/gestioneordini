@@ -27,7 +27,7 @@ public interface ArticoloService {
 	public void creaECollegaArticoloECategoria(Articolo articoloTransientInstance, Categoria categoriaTransientInstance)
 			throws Exception;
 	
-	public int sommaTotaleDegliArticoliDiUnCertoOrdine(Ordine ordineInput) throws Exception;
+	public Long sommaTotaleDegliArticoliDiUnCertoOrdine(Categoria categoriaInput) throws Exception;
 	
 	
 }
