@@ -102,7 +102,7 @@ public class TestGestioneOrdini {
 			throw new Exception("testInserisciProprietario fallito ");
 		
 		Date dataInserimentoArticolo = new SimpleDateFormat("dd/MM/yyyy").parse("10/11/2021");
-		Articolo nuovoArticolo = new Articolo("Scarpe Nike", "SCPNK120", 180, dataInserimentoArticolo, nuovoOrdine);
+		Articolo nuovoArticolo = new Articolo("Nintendo Switch", "NTDST350", 350, dataInserimentoArticolo, nuovoOrdine);
 		
 		articoloServiceInstance.inserisciNuovo(nuovoArticolo);
 		
