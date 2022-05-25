@@ -30,9 +30,12 @@ public class ArticoloDAOImpl implements ArticoloDAO{
 	}
 
 	@Override
-	public void update(Articolo o) throws Exception {
+	public void update(Articolo input) throws Exception {
 		// TODO Auto-generated method stub
+		if(input == null)
+			throw new Exception("Valore in input non valido");
 		
+		entityManager.merge(input);
 	}
 
 	@Override
