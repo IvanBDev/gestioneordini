@@ -10,10 +10,10 @@ import it.prova.gestioneordini.model.Articolo;
 import it.prova.gestioneordini.model.Categoria;
 import it.prova.gestioneordini.model.Ordine;
 
-public class ArticoloServiceImpl implements ArticoloService{
+public class ArticoloServiceImpl implements ArticoloService {
 
 	private ArticoloDAO articoloDAO;
-	
+
 	@Override
 	public void setArticoloDAO(ArticoloDAO articoloDAO) throws Exception {
 		// TODO Auto-generated method stub
@@ -55,25 +55,45 @@ public class ArticoloServiceImpl implements ArticoloService{
 	@Override
 	public void aggiorna(Articolo articoloInstance) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void inserisciNuovo(Articolo articoloInstance) throws Exception {
+	public void inserisciNuovo(Articolo articoloInput) throws Exception {
 		// TODO Auto-generated method stub
-		
+		// questo è come una connection
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			// questo è come il MyConnection.getConnection()
+			entityManager.getTransaction().begin();
+
+			// uso l'injection per il dao
+			articoloDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			articoloDAO.insert(articoloInput);
+
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 	@Override
 	public void rimuovi(Long idCd) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void aggiungiCategoria(Articolo articoloInstance, Categoria categoriaInstance) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -86,7 +106,7 @@ public class ArticoloServiceImpl implements ArticoloService{
 	public void creaECollegaArticoloECategoria(Articolo articoloTransientInstance, Categoria categoriaTransientInstance)
 			throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
