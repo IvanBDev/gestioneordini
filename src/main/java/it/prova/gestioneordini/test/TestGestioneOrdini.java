@@ -31,9 +31,9 @@ public class TestGestioneOrdini {
 			//testAggiungiCategoriaAdArticoli(articoloServiceInstance, categoriaServiceInstance);
 			//testAggiungiArticoloACategoria(ordineServiceInstance, articoloServiceInstance, categoriaServiceInstance);
 			
-			testRimuoviArticoloDaOrdine(ordineServiceInstance, articoloServiceInstance);
+			//testRimuoviArticoloDaOrdine(ordineServiceInstance, articoloServiceInstance);
 			
-			
+			testTrovaTuttiGliOrdiniDiUnaCertaCategoria(ordineServiceInstance, categoriaServiceInstance);
 			
 			System.out.println("Nella tabella Ordini sono presenti: "+ ordineServiceInstance.listAll().size()+ " elementi");
 		} catch (Throwable e) {
@@ -173,18 +173,18 @@ public class TestGestioneOrdini {
 		
 		List<Ordine> listaOrdini = ordineServiceInstance.listAll();
 		if(listaOrdini.isEmpty())
-			throw new RuntimeException("Non ci sono proprietari nel DB");
+			throw new RuntimeException("Non ci sono ordini nel DB");
 		
 		Date dataSpedizione = new SimpleDateFormat("dd/MM/yyyy").parse("19/08/2021");
 		Ordine nuovoOrdine = new Ordine("Ahmedeo", "Via Flavia 50", dataSpedizione);
 		
 		if(nuovoOrdine.getId() != null)
-			throw new RuntimeException("testInserisciProprietario fallito: record già presente ");
+			throw new RuntimeException("testInserisciOrdine fallito: record già presente ");
 		
 		ordineServiceInstance.inserisciNuovo(nuovoOrdine);
 		
 		if (nuovoOrdine.getId() == null)
-			throw new Exception("testInserisciProprietario fallito ");
+			throw new Exception("testInserisciArticolo fallito ");
 		
 		Date dataInserimentoArticolo = new SimpleDateFormat("dd/MM/yyyy").parse("17/08/2021");
 		Articolo nuovoArticolo = new Articolo("Maglietta Anime", "MGTANM55", 55, dataInserimentoArticolo, nuovoOrdine);
@@ -196,7 +196,22 @@ public class TestGestioneOrdini {
 		System.out.println(".....................testRimuoviArticoloDaOrdine fine: PASSED..................................");
 	}
 	
-	
+	public static void testTrovaTuttiGliOrdiniDiUnaCertaCategoria(OrdineService ordineServiceInstance, CategoriaService categoriaServiceInstance) throws Exception{
+		System.out.println(".....................testTrovaTuttiGliOrdiniDiUnaCertaCategoria inizio: ..................................");
+		
+		List<Categoria> listaCategorie = categoriaServiceInstance.listAll();
+		if(listaCategorie.isEmpty())
+			throw new RuntimeException("Non ci sono categorie nel DB");
+		
+		Categoria categoriaPerRicerca = listaCategorie.get(0);
+		
+		List<Ordine> listaRisultato = ordineServiceInstance.trovaTuttiGliOrdiniDiUnaCertaCategoria(categoriaPerRicerca);
+		for (Ordine ordineItem : listaRisultato) {
+			System.out.println(ordineItem.getNomeDestinatario());
+		}
+		
+		System.out.println(".....................testTrovaTuttiGliOrdiniDiUnaCertaCategoria fine: PASSED..................................");
+	}
 	
 	
 	

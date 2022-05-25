@@ -59,8 +59,8 @@ public class OrdineDAOImpl implements OrdineDAO {
 	@Override
 	public List<Ordine> findAllOrdersWithACertianCategory(Categoria catecoriaInput) throws Exception {
 		// TODO Auto-generated method stub
-		TypedQuery<Ordine> query = entityManager.createQuery("select o from Ordine o join o.articoli a join a.categorie c where c.id = :categoria", Ordine.class);
-		query.setParameter("categoria", catecoriaInput.getDescrizione());
+		TypedQuery<Ordine> query = entityManager.createQuery("select o from Ordine o join o.articoli a join a.categorie c where c.id = :idCategoria", Ordine.class);
+		query.setParameter("idCategoria", catecoriaInput.getId());
 		return query.getResultList();
 	}
 
