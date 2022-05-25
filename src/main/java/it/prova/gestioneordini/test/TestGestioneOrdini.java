@@ -46,12 +46,15 @@ public class TestGestioneOrdini {
 			// testTrovaTutteLeCategorieDistinteDaArticoliDiUnCertoOrdine(categoriaServiceInstance,
 			// ordineServiceInstance);
 
-			//testTrovaTuttiGliOrdiniRecentiDiUnaCertaCategoria(categoriaServiceInstance, ordineServiceInstance)
+			// testTrovaTuttiGliOrdiniRecentiDiUnaCertaCategoria(categoriaServiceInstance,
+			// ordineServiceInstance)
 
-			//testTrovaTuttiICodiciDistintiDaOrdiniRisalentiAlMeseDiFebbraio2022(ordineServiceInstance, articoloServiceInstance, categoriaServiceInstance);
+			// testTrovaTuttiICodiciDistintiDaOrdiniRisalentiAlMeseDiFebbraio2022(ordineServiceInstance,
+			// articoloServiceInstance, categoriaServiceInstance);
+
+			//testSommaTotaleDegliArticoliIntestatiAMarioRossi(ordineServiceInstance, articoloServiceInstance);
 			
-			testSommaTotaleDegliArticoliIntestatiAMarioRossi(ordineServiceInstance, articoloServiceInstance);
-			
+			testTrovaTuttiGliIndirizziDistintiDatoUnEstrattoDINumeroSeriale(ordineServiceInstance, articoloServiceInstance);
 
 			System.out.println(
 					"Nella tabella Ordini sono presenti: " + ordineServiceInstance.listAll().size() + " elementi");
@@ -308,10 +311,10 @@ public class TestGestioneOrdini {
 	public static void testTrovaTuttiICodiciDistintiDaOrdiniRisalentiAlMeseDiFebbraio2022(
 			OrdineService ordineServiceInstance, ArticoloService articoloServiceInstance,
 			CategoriaService categoriaServiceInstance) throws Exception {
-		
+
 		System.out.println(
 				".....................testTrovaTuttiICodiciDistintiDaOrdiniRisalentiAlMeseDiFebbraio2022 inizio: ..................................");
-		
+
 		Date dataSpedizione = new SimpleDateFormat("dd/MM/yyyy").parse("21/02/2022");
 		Ordine nuovoOrdine = new Ordine("Vittorio", "Via Lucio 20", dataSpedizione);
 
@@ -322,28 +325,30 @@ public class TestGestioneOrdini {
 
 		if (nuovoOrdine.getId() == null)
 			throw new Exception("testInserisciProprietario fallito ");
-		
+
 		Date dataInserimentoArticolo = new SimpleDateFormat("dd/MM/yyyy").parse("19/02/2022");
 		Articolo nuovoArticolo = new Articolo("Super Mario", "SPM60", 60, dataInserimentoArticolo);
 		nuovoArticolo.setOrdine(nuovoOrdine);
 		articoloServiceInstance.inserisciNuovo(nuovoArticolo);
-		
+
 		Categoria nuovaCategoria = new Categoria("Videogiochi", "00");
 		categoriaServiceInstance.inserisciNuovo(nuovaCategoria);
-		 
+
 		categoriaServiceInstance.aggiungiArticolo(nuovaCategoria, nuovoArticolo);
-		
-		List<String> risultatoRicerca = categoriaServiceInstance.trovaTuttiICodiciDistintiDaOrdiniRisalentiAlMeseDiFebbraio2022();
+
+		List<String> risultatoRicerca = categoriaServiceInstance
+				.trovaTuttiICodiciDistintiDaOrdiniRisalentiAlMeseDiFebbraio2022();
 		System.out.println(risultatoRicerca.size());
-		
+
 		System.out.println(
 				".....................testTrovaTuttiICodiciDistintiDaOrdiniRisalentiAlMeseDiFebbraio2022 fine: PASSED..................................");
 	}
-	
-	public static void testSommaTotaleDegliArticoliIntestatiAMarioRossi(OrdineService ordineServiceInstance, ArticoloService articoloServiceInstance) throws Exception{
+
+	public static void testSommaTotaleDegliArticoliIntestatiAMarioRossi(OrdineService ordineServiceInstance,
+			ArticoloService articoloServiceInstance) throws Exception {
 		System.out.println(
 				".....................testSommaTotaleDegliArticoliIntestatiAMarioRossi inizio: ..................................");
-		
+
 		Date dataSpedizione = new SimpleDateFormat("dd/MM/yyyy").parse("29/07/2022");
 		Ordine nuovoOrdine = new Ordine("Mario Rossi", "Viale Abruzzo 12", dataSpedizione);
 
@@ -354,112 +359,33 @@ public class TestGestioneOrdini {
 
 		if (nuovoOrdine.getId() == null)
 			throw new Exception("testInserisciProprietario fallito ");
-		
+
 		Date dataInserimentoArticolo = new SimpleDateFormat("dd/MM/yyyy").parse("26/07/2022");
 		Articolo nuovoArticolo = new Articolo("Giacca Gucci", "GCGC865", 865, dataInserimentoArticolo);
 		nuovoArticolo.setOrdine(nuovoOrdine);
 		articoloServiceInstance.inserisciNuovo(nuovoArticolo);
-		
+
 		System.out.println(articoloServiceInstance.sommaTotaleDegliArticoliIntestatiAMarioRossi());
-			
+
 		System.out.println(
 				".....................testSommaTotaleDegliArticoliIntestatiAMarioRossi fine: PASSED..................................");
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public static void testTrovaTuttiGliIndirizziDistintiDatoUnEstrattoDINumeroSeriale(
+			OrdineService ordineServiceInstance, ArticoloService articoloServiceInstance) throws Exception {
+		System.out.println(
+				".....................testTrovaTuttiGliIndirizziDistintiDatoUnEstrattoDINumeroSeriale inizio: ..................................");
+		
+		String codiceStringa = "SP";
+		
+		List<String> risultato = ordineServiceInstance.trovaTuttiGliIndirizziDistintiDatoUnEstrattoDINumeroSeriale(codiceStringa);
+		
+		for (String stringItem : risultato) {
+			System.out.println(stringItem);
+		}
+		
+		System.out.println(
+				".....................testTrovaTuttiGliIndirizziDistintiDatoUnEstrattoDINumeroSeriale fine: PASSED..................................");
+	}
 
 }
