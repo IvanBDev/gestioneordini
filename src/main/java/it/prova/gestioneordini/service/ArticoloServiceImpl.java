@@ -9,10 +9,12 @@ import it.prova.gestioneordini.model.Ordine;
 
 public class ArticoloServiceImpl implements ArticoloService{
 
+	private ArticoloDAO articoloDAO;
+	
 	@Override
-	public void setArticoloDAO(ArticoloDAO articoloDaoInstance) throws Exception {
+	public void setArticoloDAO(ArticoloDAO articoloDAO) throws Exception {
 		// TODO Auto-generated method stub
-		
+		this.articoloDAO = articoloDAO;
 	}
 
 	@Override
