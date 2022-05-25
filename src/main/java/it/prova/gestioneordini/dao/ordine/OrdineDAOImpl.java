@@ -65,9 +65,12 @@ public class OrdineDAOImpl implements OrdineDAO {
 	}
 
 	@Override
-	public List<Ordine> findAllRecentOrdersOfACertianCategory(Categoria categoriaInput) throws Exception {
+	public Ordine findAllRecentOrdersOfACertianCategory(Categoria categoriaInput) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Ordine> query = entityManager.createQuery("SELECT o FROM Ordine o INNER JOIN o.articoli a INNER JOIN a.categorie c WHERE c = :categoriaInput GROUP BY o.dataSpedizione", Ordine.class);
+		query.setParameter("categoriaInput", categoriaInput);
+		
+		return query.getResultList().get(query.getResultList().size() - 1);
 	}
 
 	@Override

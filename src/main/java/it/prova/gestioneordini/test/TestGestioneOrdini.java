@@ -37,8 +37,9 @@ public class TestGestioneOrdini {
 			
 			//testSommaDegliArticoliDataUnaDeterminataCategoria(articoloServiceInstance, categoriaServiceInstance);
 			
-			testTrovaTutteLeCategorieDistinteDaArticoliDiUnCertoOrdine(categoriaServiceInstance, ordineServiceInstance);
+			//testTrovaTutteLeCategorieDistinteDaArticoliDiUnCertoOrdine(categoriaServiceInstance, ordineServiceInstance);
 			
+			testTrovaTuttiGliOrdiniRecentiDiUnaCertaCategoria(categoriaServiceInstance, ordineServiceInstance);
 			
 			System.out.println("Nella tabella Ordini sono presenti: "+ ordineServiceInstance.listAll().size()+ " elementi");
 		} catch (Throwable e) {
@@ -248,7 +249,24 @@ public class TestGestioneOrdini {
 		System.out.println(".....................testTrovaTutteLeCategorieDistinteDaArticoliDiUnCertoOrdine fine: PASSED..................................");
 	}
 	
-	
+	public static void testTrovaTuttiGliOrdiniRecentiDiUnaCertaCategoria(CategoriaService categoriaServiceInstance, OrdineService ordineServiceInstance) throws Exception{
+		System.out.println(".....................testTrovaTuttiGliOrdiniRecentiDiUnaCertaCategoria inizio: ..................................");
+		
+		List<Categoria> listaCategorie = categoriaServiceInstance.listAll();
+		if(listaCategorie.isEmpty())
+			throw new RuntimeException("Non ci sono categorie nel DB");
+		
+		List<Ordine> listaOrdini = ordineServiceInstance.listAll();
+		if(listaOrdini.isEmpty())
+			throw new RuntimeException("Non ci sono ordini nel DB");
+		
+		Categoria risultato = categoriaServiceInstance.listAll().get(0);
+		Ordine ordineRicerca = ordineServiceInstance.trovaTuttiGliOrdiniRecentiDiUnaCertaCategoria(risultato);
+		
+		System.out.println(ordineRicerca.getNomeDestinatario()+", "+ordineRicerca.getDataSpedizione());
+		
+		System.out.println(".....................testTrovaTuttiGliOrdiniRecentiDiUnaCertaCategoria fine: PASSED..................................");
+	}
 	
 	
 	

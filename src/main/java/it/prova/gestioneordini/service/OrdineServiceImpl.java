@@ -143,9 +143,23 @@ public class OrdineServiceImpl implements OrdineService {
 	}
 
 	@Override
-	public List<Ordine> trovaTuttiGliOrdiniRecentiDiUnaCertaCategoria(Categoria categoriaInput) throws Exception {
+	public Ordine trovaTuttiGliOrdiniRecentiDiUnaCertaCategoria(Categoria categoriaInput) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		// questo è come una connection
+				EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+				try {
+					// uso l'injection per il dao
+					ordineDAO.setEntityManager(entityManager);
+
+					// eseguo quello che realmente devo fare
+					return ordineDAO.findAllRecentOrdersOfACertianCategory(categoriaInput);
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw e;
+				} finally {
+					EntityManagerUtil.closeEntityManager(entityManager);
+				}
 	}
 
 	@Override
