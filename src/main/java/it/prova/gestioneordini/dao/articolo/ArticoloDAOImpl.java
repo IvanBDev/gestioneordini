@@ -8,17 +8,19 @@ import it.prova.gestioneordini.model.Articolo;
 import it.prova.gestioneordini.model.Ordine;
 
 public class ArticoloDAOImpl implements ArticoloDAO{
+	
+	private EntityManager entityManager;
 
 	@Override
 	public void setEntityManager(EntityManager entityManager) {
 		// TODO Auto-generated method stub
-		
+		this.entityManager = entityManager;
 	}
 
 	@Override
 	public List<Articolo> list() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return entityManager.createQuery("FROM Articolo", Articolo.class).getResultList();
 	}
 
 	@Override
