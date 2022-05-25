@@ -29,5 +29,7 @@ public interface ArticoloService {
 	
 	public Long sommaTotaleDegliArticoliDiUnCertoOrdine(Categoria categoriaInput) throws Exception;
 	
+	public Long sommaTotaleDegliArticoliIntestatiAMarioRossi() throws Exception;
+	
 	
 }

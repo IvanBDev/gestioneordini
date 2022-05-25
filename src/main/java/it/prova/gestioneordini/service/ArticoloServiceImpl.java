@@ -198,4 +198,23 @@ public class ArticoloServiceImpl implements ArticoloService {
 
 	}
 
+	@Override
+	public Long sommaTotaleDegliArticoliIntestatiAMarioRossi() throws Exception {
+		// TODO Auto-generated method stub
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			// uso l'injection per il dao
+			articoloDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			return articoloDAO.totalSumOfArticalsMadebyMarioRossi();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+	}
+
 }
