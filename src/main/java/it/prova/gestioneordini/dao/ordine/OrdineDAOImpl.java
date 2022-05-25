@@ -70,4 +70,12 @@ public class OrdineDAOImpl implements OrdineDAO {
 		return null;
 	}
 
+	@Override
+	public boolean findIfOrderHasArticles(Long idOrdine) throws Exception {
+		TypedQuery<Ordine> query = entityManager.createQuery("FROM Ordine o INNER JOIN o.articoli a WHERE o.id = :idOrdine", Ordine.class); 
+		query.setParameter("idOrdine", idOrdine);
+		
+		return query.getResultList().isEmpty();
+	}
+
 }

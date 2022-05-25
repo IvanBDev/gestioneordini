@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 
 import it.prova.gestioneordini.dao.EntityManagerUtil;
 import it.prova.gestioneordini.dao.ordine.OrdineDAO;
+import it.prova.gestioneordini.exception.CustomException;
 import it.prova.gestioneordini.model.Articolo;
 import it.prova.gestioneordini.model.Categoria;
 import it.prova.gestioneordini.model.Ordine;
@@ -106,8 +107,11 @@ public class OrdineServiceImpl implements OrdineService {
 			ordineDAO.setEntityManager(entityManager);
 
 			// eseguo quello che realmente devo fare
-			ordineDAO.delete(ordineDAO.get(ordineId));
-
+			if(ordineDAO.findIfOrderHasArticles(ordineId) == false)
+				ordineDAO.delete(ordineDAO.get(ordineId));
+			else
+				throw new CustomException("Ordine possiede ancora degli articoli");
+			
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();

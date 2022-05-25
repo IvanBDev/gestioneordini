@@ -10,4 +10,6 @@ public interface ArticoloDAO extends IBaseDAO<Articolo>{
 	
 	public boolean controlloPresenzaOrdini(Long idOrdine) throws Exception; 
 	
+	public boolean findIfArticlesHasCategories(Long idArticolo) throws Exception;
+	
 }

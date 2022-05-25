@@ -29,4 +29,5 @@ public interface ArticoloService {
 	
 	public int sommaTotaleDegliArticoliDiUnCertoOrdine(Ordine ordineInput) throws Exception;
 	
+	
 }

@@ -13,4 +13,6 @@ public interface OrdineDAO extends IBaseDAO<Ordine>{
 	
 	public List<Ordine> findAllRecentOrdersOfACertianCategory(Categoria categoriaInput) throws Exception;
 	
+	public boolean findIfOrderHasArticles(Long idOrdine) throws Exception;
+	
 }

@@ -10,4 +10,6 @@ public interface CategoriaDAO extends IBaseDAO<Categoria>{
 	
 	public List<Categoria> findAllCategoriesDistinctByArticlesOfACertianOrder(Ordine ordineInput) throws Exception;
 	
+	public boolean findIfCategoriessHaveArticles(Long Categorie) throws Exception;
+	
 }

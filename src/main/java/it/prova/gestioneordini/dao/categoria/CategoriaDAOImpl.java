@@ -2,6 +2,8 @@ package it.prova.gestioneordini.dao.categoria;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
 import it.prova.gestioneordini.model.Categoria;
 import it.prova.gestioneordini.model.Ordine;
 
@@ -55,6 +57,15 @@ public class CategoriaDAOImpl implements CategoriaDAO{
 	public List<Categoria> findAllCategoriesDistinctByArticlesOfACertianOrder(Ordine ordineInput) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean findIfCategoriessHaveArticles(Long idCategorie) throws Exception {
+		// TODO Auto-generated method stub
+		TypedQuery<Categoria> query = entityManager.createQuery("FROM Ordine o INNER JOIN o.articoli a WHERE o.id = :idCategorie", Categoria.class); 
+		query.setParameter("idCategorie", idCategorie);
+		
+		return query.getResultList().isEmpty();
 	}
 	
 }

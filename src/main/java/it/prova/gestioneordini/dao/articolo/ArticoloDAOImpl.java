@@ -71,4 +71,13 @@ public class ArticoloDAOImpl implements ArticoloDAO{
 		return query.getResultList().isEmpty();
 	}
 
+	@Override
+	public boolean findIfArticlesHasCategories(Long idArticolo) throws Exception {
+		// TODO Auto-generated method stub
+		TypedQuery<Articolo> query = entityManager.createQuery("FROM Articolo a INNER JOIN a.categorie c WHERE a.id = :idArticolo", Articolo.class); 
+		query.setParameter("idArticolo", idArticolo);
+		
+		return query.getResultList().isEmpty();
+	}
+
 }

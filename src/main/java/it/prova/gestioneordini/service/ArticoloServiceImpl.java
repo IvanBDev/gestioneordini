@@ -119,7 +119,10 @@ public class ArticoloServiceImpl implements ArticoloService {
 			articoloDAO.setEntityManager(entityManager);
 
 			// eseguo quello che realmente devo fare
+			if(articoloDAO.findIfArticlesHasCategories(idInput) == false)
 				articoloDAO.delete(articoloDAO.get(idInput));
+			else
+				throw new CustomException("Articolo ha al suo interno delle categorie");
 
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
