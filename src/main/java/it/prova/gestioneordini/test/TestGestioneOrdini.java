@@ -6,6 +6,7 @@ import java.util.List;
 
 import it.prova.gestioneordini.dao.EntityManagerUtil;
 import it.prova.gestioneordini.model.Articolo;
+import it.prova.gestioneordini.model.Categoria;
 import it.prova.gestioneordini.model.Ordine;
 import it.prova.gestioneordini.service.ArticoloService;
 import it.prova.gestioneordini.service.CategoriaService;
@@ -23,9 +24,11 @@ public class TestGestioneOrdini {
 		try {
 			System.out.println("Nella tabella Ordini sono presenti: "+ ordineServiceInstance.listAll().size()+ " elementi");
 			//testInserisciNuovoOrdine(ordineServiceInstance);
-			testInserisciArticoloAOrdine(ordineServiceInstance, articoloServiceInstance);
+			//testInserisciArticoloAOrdine(ordineServiceInstance, articoloServiceInstance);
 			
 			//testAggiornaRecordOrdine(ordineServiceInstance);
+			
+			testAggiungiCategoriaAdArticoli(articoloServiceInstance, categoriaServiceInstance);
 			
 			System.out.println("Nella tabella Ordini sono presenti: "+ ordineServiceInstance.listAll().size()+ " elementi");
 		} catch (Throwable e) {
@@ -109,4 +112,46 @@ public class TestGestioneOrdini {
 		System.out.println(".....................testInserisciArticoloAOrdine fine: PASSED..................................");
 	}
 
+	public static void testAggiungiCategoriaAdArticoli(ArticoloService articoloServiceInstance, CategoriaService categoriaServiceInstance) throws Exception{
+		System.out.println(".....................testAggiungiCategoriaAdArticoli inizio: ..................................");
+		
+		List<Articolo> listaArticoli = articoloServiceInstance.listAll();
+		if(listaArticoli.isEmpty())
+			throw new RuntimeException("Non ci sono proprietari nel DB");
+		
+		Articolo articoloPrivoDiCategoria = listaArticoli.get(0);
+		
+		Categoria nuovaCategoria = new Categoria("00", "Videogioco");
+		categoriaServiceInstance.inserisciNuovo(nuovaCategoria);
+		if(nuovaCategoria.getId() == null)
+			throw new RuntimeException("Non ci sono categorie nel DB");
+		
+		articoloServiceInstance.aggiungiCategoria(articoloPrivoDiCategoria, nuovaCategoria);
+		
+		System.out.println(".....................testAggiungiCategoriaAdArticoli fine: PASSED..................................");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
