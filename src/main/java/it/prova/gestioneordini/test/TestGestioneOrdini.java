@@ -31,9 +31,9 @@ public class TestGestioneOrdini {
 			//testAggiungiCategoriaAdArticoli(articoloServiceInstance, categoriaServiceInstance);
 			//testAggiungiArticoloACategoria(ordineServiceInstance, articoloServiceInstance, categoriaServiceInstance);
 			
-			//testRimuoviArticoloDaOrdine(ordineServiceInstance, articoloServiceInstance);
+			testRimuoviArticoloDaOrdine(ordineServiceInstance, articoloServiceInstance);
 			
-			testTrovaTuttiGliOrdiniDiUnaCertaCategoria(ordineServiceInstance, categoriaServiceInstance);
+			//testTrovaTuttiGliOrdiniDiUnaCertaCategoria(ordineServiceInstance, categoriaServiceInstance);
 			
 			System.out.println("Nella tabella Ordini sono presenti: "+ ordineServiceInstance.listAll().size()+ " elementi");
 		} catch (Throwable e) {
@@ -175,23 +175,25 @@ public class TestGestioneOrdini {
 		if(listaOrdini.isEmpty())
 			throw new RuntimeException("Non ci sono ordini nel DB");
 		
-		Date dataSpedizione = new SimpleDateFormat("dd/MM/yyyy").parse("19/08/2021");
-		Ordine nuovoOrdine = new Ordine("Ahmedeo", "Via Flavia 50", dataSpedizione);
+		Date dataSpedizione = new SimpleDateFormat("dd/MM/yyyy").parse("19/07/2021");
+		Ordine nuovoOrdine = new Ordine("Sofiaaa", "Via Monteroni 10", dataSpedizione);
 		
 		if(nuovoOrdine.getId() != null)
 			throw new RuntimeException("testInserisciOrdine fallito: record già presente ");
 		
+		
+		Date dataInserimentoArticolo = new SimpleDateFormat("dd/MM/yyyy").parse("17/07/2021");
+		Articolo nuovoArticolo = new Articolo("Maglietta Anime5", "MGTANM555", 55, dataInserimentoArticolo);
+		
+		nuovoArticolo.setOrdine(nuovoOrdine);
 		ordineServiceInstance.inserisciNuovo(nuovoOrdine);
 		
 		if (nuovoOrdine.getId() == null)
 			throw new Exception("testInserisciArticolo fallito ");
 		
-		Date dataInserimentoArticolo = new SimpleDateFormat("dd/MM/yyyy").parse("17/08/2021");
-		Articolo nuovoArticolo = new Articolo("Maglietta Anime", "MGTANM55", 55, dataInserimentoArticolo, nuovoOrdine);
-		
 		articoloServiceInstance.inserisciNuovo(nuovoArticolo);
 		
-		ordineServiceInstance.rimuoviArticolo(nuovoOrdine, nuovoArticolo);
+		articoloServiceInstance.rimuovi(nuovoArticolo.getId());
 		
 		System.out.println(".....................testRimuoviArticoloDaOrdine fine: PASSED..................................");
 	}

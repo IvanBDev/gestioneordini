@@ -24,5 +24,7 @@ public interface OrdineService {
 	public List<Ordine> trovaTuttiGliOrdiniDiUnaCertaCategoria(Categoria catecoriaInput) throws Exception;
 
 	public List<Ordine> trovaTuttiGliOrdiniRecentiDiUnaCertaCategoria(Categoria categoriaInput) throws Exception;
+	
+	public void aggiungiArticolo(Ordine ordineInput, Articolo articoloInput) throws Exception;
 
 }
