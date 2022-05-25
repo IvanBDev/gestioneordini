@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import it.prova.gestioneordini.model.Articolo;
+import it.prova.gestioneordini.model.Categoria;
 import it.prova.gestioneordini.model.Ordine;
 
 public class ArticoloDAOImpl implements ArticoloDAO{
@@ -58,17 +59,12 @@ public class ArticoloDAOImpl implements ArticoloDAO{
 	}
 
 	@Override
-	public int totalSumOfArticlesByACertianOrder(Ordine ordineInput) throws Exception {
+	public Long totalSumOfArticlesByACertianOrder(Categoria categoriaInput) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean controlloPresenzaOrdini(Long idOrdine) throws Exception {
-		// TODO Auto-generated method stub
-		TypedQuery<Articolo> query = entityManager.createQuery("SELECT o.* FROM Articolo a INNER JOIN a.ordine o WHERE o.id = :idOrdine", Articolo.class);
-		query.setParameter("idOrdine", idOrdine);
-		return query.getResultList().isEmpty();
+		TypedQuery<Long> query = entityManager.createQuery("SELECT SUM(a.prezzoSingolo) FROM Articolo a INNER JOIN  a.categorie c WHERE c = :categoriaInput", Long.class);
+		query.setParameter("idCategoria", categoriaInput);
+		
+		return query.getResultList().get(0);
 	}
 
 	@Override
