@@ -184,4 +184,23 @@ public class CategoriaServiceImpl implements CategoriaService {
 		}
 	}
 
+	@Override
+	public List<String> trovaTuttiICodiciDistintiDaOrdiniRisalentiAlMeseDiFebbraio2022() throws Exception {
+		// TODO Auto-generated method stub
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			// uso l'injection per il dao
+			categoriaDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			return categoriaDAO.AllDistinctCodeFromOrdersAtFebruary();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+	}
+
 }

@@ -12,4 +12,6 @@ public interface CategoriaDAO extends IBaseDAO<Categoria>{
 	
 	public boolean findIfCategoriessHaveArticles(Long Categorie) throws Exception;
 	
+	public List<String> AllDistinctCodeFromOrdersAtFebruary() throws Exception;
+	
 }

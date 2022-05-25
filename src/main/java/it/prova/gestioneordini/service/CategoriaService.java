@@ -23,5 +23,7 @@ public interface CategoriaService {
 	void aggiungiArticolo(Categoria categoriaInstance, Articolo articoloInstance) throws Exception;
 	
 	public List<Categoria> trovaTutteLeCategorieDistinteDaArticoliDiUnCertoOrdine(Ordine ordineInput) throws Exception;
+	
+	public List<String> trovaTuttiICodiciDistintiDaOrdiniRisalentiAlMeseDiFebbraio2022() throws Exception;
 
 }

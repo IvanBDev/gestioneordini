@@ -69,5 +69,11 @@ public class CategoriaDAOImpl implements CategoriaDAO{
 		
 		return query.getResultList().isEmpty();
 	}
+
+	@Override
+	public List<String> AllDistinctCodeFromOrdersAtFebruary() throws Exception {
+		// TODO Auto-generated method stub
+		return entityManager.createQuery("SELECT DISTINCT c.codice FROM Categoria c INNER JOIN c.articoli a INNER JOIN a.ordine o WHERE o.dataSpedizione BETWEEN '2022-02-01' AND '2022-02-28'", String.class).getResultList();
+	}
 	
 }
