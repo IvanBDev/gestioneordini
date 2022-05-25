@@ -107,11 +107,11 @@ public class OrdineServiceImpl implements OrdineService {
 			ordineDAO.setEntityManager(entityManager);
 
 			// eseguo quello che realmente devo fare
-			if(ordineDAO.findIfOrderHasArticles(ordineId) == false)
+			if (ordineDAO.findIfOrderHasArticles(ordineId) == false)
 				ordineDAO.delete(ordineDAO.get(ordineId));
 			else
 				throw new CustomException("Ordine possiede ancora degli articoli");
-			
+
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
@@ -146,20 +146,20 @@ public class OrdineServiceImpl implements OrdineService {
 	public Ordine trovaTuttiGliOrdiniRecentiDiUnaCertaCategoria(Categoria categoriaInput) throws Exception {
 		// TODO Auto-generated method stub
 		// questo è come una connection
-				EntityManager entityManager = EntityManagerUtil.getEntityManager();
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
-				try {
-					// uso l'injection per il dao
-					ordineDAO.setEntityManager(entityManager);
+		try {
+			// uso l'injection per il dao
+			ordineDAO.setEntityManager(entityManager);
 
-					// eseguo quello che realmente devo fare
-					return ordineDAO.findAllRecentOrdersOfACertianCategory(categoriaInput);
-				} catch (Exception e) {
-					e.printStackTrace();
-					throw e;
-				} finally {
-					EntityManagerUtil.closeEntityManager(entityManager);
-				}
+			// eseguo quello che realmente devo fare
+			return ordineDAO.findAllRecentOrdersOfACertianCategory(categoriaInput);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 	@Override
@@ -229,6 +229,27 @@ public class OrdineServiceImpl implements OrdineService {
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+	}
+
+	@Override
+	public List<String> trovaTuttiGliIndirizziDistintiDatoUnEstrattoDINumeroSeriale(String codiceStringa)
+			throws Exception {
+		// TODO Auto-generated method stub
+		// questo è come una connection
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			// uso l'injection per il dao
+			ordineDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			return ordineDAO.findAllDistinctOrderAddressesWithCode(codiceStringa);
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		} finally {

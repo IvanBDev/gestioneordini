@@ -26,5 +26,7 @@ public interface OrdineService {
 	public Ordine trovaTuttiGliOrdiniRecentiDiUnaCertaCategoria(Categoria categoriaInput) throws Exception;
 	
 	public void aggiungiArticolo(Ordine ordineInput, Articolo articoloInput) throws Exception;
+	
+	public List<String> trovaTuttiGliIndirizziDistintiDatoUnEstrattoDINumeroSeriale(String codiceStringa) throws Exception;
 
 }
