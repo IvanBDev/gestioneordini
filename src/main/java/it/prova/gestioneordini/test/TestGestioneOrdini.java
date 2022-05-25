@@ -48,8 +48,9 @@ public class TestGestioneOrdini {
 
 			//testTrovaTuttiGliOrdiniRecentiDiUnaCertaCategoria(categoriaServiceInstance, ordineServiceInstance)
 
-			testTrovaTuttiICodiciDistintiDaOrdiniRisalentiAlMeseDiFebbraio2022(ordineServiceInstance, articoloServiceInstance, categoriaServiceInstance);
+			//testTrovaTuttiICodiciDistintiDaOrdiniRisalentiAlMeseDiFebbraio2022(ordineServiceInstance, articoloServiceInstance, categoriaServiceInstance);
 			
+			testSommaTotaleDegliArticoliIntestatiAMarioRossi(ordineServiceInstance, articoloServiceInstance);
 			
 
 			System.out.println(
@@ -338,5 +339,127 @@ public class TestGestioneOrdini {
 		System.out.println(
 				".....................testTrovaTuttiICodiciDistintiDaOrdiniRisalentiAlMeseDiFebbraio2022 fine: PASSED..................................");
 	}
+	
+	public static void testSommaTotaleDegliArticoliIntestatiAMarioRossi(OrdineService ordineServiceInstance, ArticoloService articoloServiceInstance) throws Exception{
+		System.out.println(
+				".....................testSommaTotaleDegliArticoliIntestatiAMarioRossi inizio: ..................................");
+		
+		Date dataSpedizione = new SimpleDateFormat("dd/MM/yyyy").parse("29/07/2022");
+		Ordine nuovoOrdine = new Ordine("Mario Rossi", "Viale Abruzzo 12", dataSpedizione);
+
+		if (nuovoOrdine.getId() != null)
+			throw new RuntimeException("testInserisciProprietario fallito: record già presente ");
+
+		ordineServiceInstance.inserisciNuovo(nuovoOrdine);
+
+		if (nuovoOrdine.getId() == null)
+			throw new Exception("testInserisciProprietario fallito ");
+		
+		Date dataInserimentoArticolo = new SimpleDateFormat("dd/MM/yyyy").parse("26/07/2022");
+		Articolo nuovoArticolo = new Articolo("Giacca Gucci", "GCGC865", 865, dataInserimentoArticolo);
+		nuovoArticolo.setOrdine(nuovoOrdine);
+		articoloServiceInstance.inserisciNuovo(nuovoArticolo);
+		
+		System.out.println(articoloServiceInstance.sommaTotaleDegliArticoliIntestatiAMarioRossi());
+			
+		System.out.println(
+				".....................testSommaTotaleDegliArticoliIntestatiAMarioRossi fine: PASSED..................................");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
