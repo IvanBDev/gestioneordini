@@ -29,7 +29,9 @@ public class TestGestioneOrdini {
 			//testAggiornaRecordOrdine(ordineServiceInstance);
 			
 			//testAggiungiCategoriaAdArticoli(articoloServiceInstance, categoriaServiceInstance);
-			testAggiungiArticoloACategoria(ordineServiceInstance, articoloServiceInstance, categoriaServiceInstance);
+			//testAggiungiArticoloACategoria(ordineServiceInstance, articoloServiceInstance, categoriaServiceInstance);
+			
+			System.out.println(articoloServiceInstance.listAll().get(0).getOrdine());
 			
 			System.out.println("Nella tabella Ordini sono presenti: "+ ordineServiceInstance.listAll().size()+ " elementi");
 		} catch (Throwable e) {
