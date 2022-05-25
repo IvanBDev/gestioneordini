@@ -2,6 +2,7 @@ package it.prova.gestioneordini.test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import it.prova.gestioneordini.dao.EntityManagerUtil;
 import it.prova.gestioneordini.model.Ordine;
@@ -19,8 +20,10 @@ public class TestGestioneOrdini {
 		CategoriaService categoriaServiceInstance = MyServiceFactory.getCategoriaServiceInstance();
 		
 		try {
-			//System.out.println("Nella tabella Ordini sono presenti: "+ ordineServiceInstance.listAll().size()+ " elementi");
-			testInserisciNuovoOrdine(ordineServiceInstance);
+			System.out.println("Nella tabella Ordini sono presenti: "+ ordineServiceInstance.listAll().size()+ " elementi");
+			//testInserisciNuovoOrdine(ordineServiceInstance);
+			
+			//testAggiornaRecordOrdine(ordineServiceInstance);
 			
 
 		} catch (Throwable e) {
@@ -48,6 +51,34 @@ public class TestGestioneOrdini {
 			
 		
 		System.out.println(".....................testInserisciNuovoOrdine fine: PASSED..................................");
+	}
+	
+	public static void testAggiornaRecordOrdine(OrdineService ordineServiceInstance) throws Exception{
+		System.out.println(".....................testAggiornaRecordOrdine inizio: ..................................");
+		
+		List<Ordine> listaOrdini = ordineServiceInstance.listAll();
+		if(listaOrdini.isEmpty())
+			throw new RuntimeException("Non ci sono proprietari nel DB");
+		
+		Date dataSpedizione = new SimpleDateFormat("dd/MM/yyyy").parse("25/06/2021");
+		Ordine nuovoOrdine = new Ordine("Paolo", "Via Firenze 111", dataSpedizione);
+		
+		if(nuovoOrdine.getId() != null)
+			throw new RuntimeException("testInserisciProprietario fallito: record già presente ");
+		
+		ordineServiceInstance.inserisciNuovo(nuovoOrdine);
+		
+		if (nuovoOrdine.getId() == null)
+			throw new Exception("testInserisciProprietario fallito ");
+		
+		Ordine ordineUpdate = nuovoOrdine;
+		//ordineUpdate.setNomeDestinatario("");
+		ordineUpdate.setIndirizzoSpedizione("Via Firenze 112");
+		//ordineUpdate.setDataSpedizione(new SimpleDateFormat("dd/MM/yyyy").parse(""));
+		
+		ordineServiceInstance.aggiorna(ordineUpdate);
+		
+		System.out.println(".....................testAggiornaRecordOrdine fine: PASSED..................................");
 	}
 
 }
